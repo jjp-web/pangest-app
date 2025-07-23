@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Crear Empresario</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h2>Registrar nuevo empresario</h2>
+    <form th:action="@{/admin/crear-empresario}" method="post">
+        <fieldset>
+            <legend>Datos de empresa</legend>
+            <input type="text" name="nombre" placeholder="Nombre empresa" required/><br/>
+            <input type="text" name="descripcion" placeholder="Descripción" required/><br/>
+            <input type="text" name="rubro" placeholder="Rubro" required/><br/>
+        </fieldset>
+        <fieldset>
+            <legend>Datos de usuario</legend>
+            <input type="text" name="username" placeholder="Usuario" required/><br/>
+            <input type="password" name="password" placeholder="Contraseña" required/><br/>
+        </fieldset>
+        <button type="submit">Guardar</button>
+    </form>
+</body>
+</html>

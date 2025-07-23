@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Iniciar sesión - PanGest</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h2>Iniciar sesión</h2>
+    <form th:action="@{/login}" method="post">
+        <!-- ► Aquí el token CSRF -->
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+        <div>
+            <label>Usuario:</label>
+            <input type="text" name="username"/>
+        </div>
+        <div>
+            <label>Contraseña:</label>
+            <input type="password" name="password"/>
+        </div>
+        <button type="submit">Ingresar</button>
+        <div th:if="${param.error}">
+            <p style="color: red;">Credenciales inválidas</p>
+        </div>
+        <div th:if="${param.logout}">
+            <p style="color: green;">Has cerrado sesión</p>
+        </div>
+    </form>
+</body>
+</html>

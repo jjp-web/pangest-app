@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Administrador</title>
+</head>
+<body>
+    <h1>Bienvenido, Administrador</h1>
+    <h2>Empresas Registradas</h2>
+    
+<thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Rubro</th>
+        <th>Productos</th>
+        <th>Acciones</th>
+    </tr>
+</thead>
+<tbody>
+    <tr th:if="${empresas == null or #lists.isEmpty(empresas)}">
+        <td colspan="5" style="text-align: center;">No hay empresas registradas</td>
+    </tr>
+    <tr th:each="empresa : ${empresas}" th:unless="${empresas == null or #lists.isEmpty(empresas)}">
+        <td th:text="${empresa.nombre}"></td>
+        <td th:text="${empresa.descripcion}"></td>
+        <td th:text="${empresa.rubro}"></td>
+        <td th:text="${empresa.productos != null ? empresa.productos.size() : 0}"></td>
+        <td>
+            <button>Ver</button>
+            <button>Editar</button>
+            <button>Eliminar</button>
+        </td>
+    </tr>
+</tbody>
+
+
+
+    <br>
+    <a href="/admin/crear-empresario">
+        <button>Crear Nueva Empresa</button>
+    </a>
+</body>
+</html>
+

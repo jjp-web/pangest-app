@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mis productos</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h2>Mis productos</h2>
+    <a href="/empresario/productos/nuevo">Agregar nuevo producto</a>
+    <ul>
+        <li th:each="p : ${productos}">
+            <b th:text="${p.nombre}"></b> - 
+            <span th:text="${p.descripcion}"></span> (S/ <span th:text="${p.precio}"></span>)
+            <a th:href="@{'/empresario/productos/eliminar/' + ${p.id}}">Eliminar</a>
+        </li>
+    </ul>
+</body>
+</html>

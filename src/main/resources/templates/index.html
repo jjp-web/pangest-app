@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>PanGest - Catálogo</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <h1>Bienvenido a PanGest 🍞</h1>
+
+    <h2>Empresas registradas</h2>
+    <ul>
+        <li th:each="empresa : ${empresas}">
+            <b th:text="${empresa.nombre}"></b> - 
+            <span th:text="${empresa.descripcion}"></span>
+        </li>
+    </ul>
+
+    <h2>Productos</h2>
+    <ul>
+        <li th:each="prod : ${productos}">
+            <b th:text="${prod.nombre}"></b> - 
+            <span th:text="${prod.descripcion}"></span> 
+            (S/ <span th:text="${prod.precio}"></span>)<br/>
+            Empresa: <i th:text="${prod.empresa.nombre}"></i>
+        </li>
+    </ul>
+</body>
+</html>
