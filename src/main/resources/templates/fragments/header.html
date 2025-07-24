@@ -1,0 +1,55 @@
+<header>
+  <div class="navbar navbar-expand-lg navbar-dark bg-dark px-4 py-2">
+    <a class="navbar-brand fw-bold" href="/">PanGest</a>
+
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto">
+
+        <!-- Menú para ADMIN -->
+        <li class="nav-item" th:if="${usuario != null and usuario.rol == 'ADMIN'}">
+          <a class="nav-link text-info" href="/admin/dashboard">Dashboard</a>
+        </li>
+        <li class="nav-item" th:if="${usuario != null and usuario.rol == 'ADMIN'}">
+          <a class="nav-link text-info" href="/admin/crear-empresario">Crear Empresa</a>
+        </li>
+
+        <!-- Menú para EMPRESARIO -->
+        <li class="nav-item" th:if="${usuario != null and usuario.rol == 'EMPRESARIO'}">
+          <a class="nav-link text-success " href="/empresario/dashboard">Dashboard Empresa</a>
+        </li>
+        <li class="nav-item" th:if="${usuario != null and usuario.rol == 'EMPRESARIO'}">
+          <a class="nav-link text-success " href="/empresario/crear-producto">Crear Productos</a>
+        </li>
+        <li class="nav-item" th:if="${usuario != null and usuario.rol == 'EMPRESARIO'}">
+          <a class="nav-link text-success " href="/empresario/productos">Mis Productos</a>
+        </li>
+
+        <!-- Menú común -->
+        <li class="nav-item">
+          <a class="nav-link text-white" href="/">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="/empresas">Empresas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="/productos">Productos</a>
+        </li>
+      </ul>
+
+      <div class="d-flex align-items-center gap-3 text-white">
+        <span th:if="${usuario != null}">
+          👤 <strong th:text="${usuario.username}">NombreUsuario</strong>
+        </span>
+
+        <form th:if="${usuario != null}" th:action="@{/logout}" method="post" class="mb-0">
+          <button class="btn btn-outline-light btn-sm" type="submit">Cerrar sesión</button>
+        </form>
+
+        <span th:if="${usuario == null}" class="text-warning">
+          <a href="/login" class="btn btn-outline-primary btn-sm">Iniciar Sesión</a>
+        </span>
+      </div>
+
+    </div>
+  </div>
+</header>

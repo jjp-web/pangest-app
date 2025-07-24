@@ -3,16 +3,47 @@
 <head>
     <title>Mis productos</title>
     <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h2>Mis productos</h2>
-    <a href="/empresario/productos/nuevo">Agregar nuevo producto</a>
-    <ul>
-        <li th:each="p : ${productos}">
-            <b th:text="${p.nombre}"></b> - 
-            <span th:text="${p.descripcion}"></span> (S/ <span th:text="${p.precio}"></span>)
-            <a th:href="@{'/empresario/productos/eliminar/' + ${p.id}}">Eliminar</a>
-        </li>
-    </ul>
+<body class="bg-light">
+<div th:replace="~{fragments/header :: header}"></div>
+
+
+
+<div class="container mt-5">
+    <h2 class="mb-4">Mis productos</h2>
+
+    <div class="mb-3">
+        <a href="/empresario/crear-producto" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> Agregar nuevo producto
+        </a>
+    </div>
+
+    <div th:if="${#lists.isEmpty(productos)}" class="alert alert-info">
+        No tienes productos registrados.
+    </div>
+
+    <div th:if="${!#lists.isEmpty(productos)}">
+        <div class="list-group">
+            <div th:each="p : ${productos}" class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="mb-1" th:text="${p.nombre}">Nombre Producto</h5>
+                    <p class="mb-1" th:text="${p.descripcion}">Descripción</p>
+                    <small class="text-muted">S/ <span th:text="${#numbers.formatDecimal(p.precio, 1, 'COMMA', 2, 'POINT')}">0.00</span></small>
+                </div>
+                <div>
+                    <a th:href="@{'/empresario/productos/eliminar/' + ${p.id}}" class="btn btn-danger btn-sm" 
+                       onclick="return confirm('¿Estás seguro que deseas eliminar este producto?');">
+                        Eliminar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap icons CDN para el icono plus -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
 </body>
 </html>

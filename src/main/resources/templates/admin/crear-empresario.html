@@ -3,22 +3,53 @@
 <head>
     <title>Crear Empresario</title>
     <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h2>Registrar nuevo empresario</h2>
-    <form th:action="@{/admin/crear-empresario}" method="post">
-        <fieldset>
-            <legend>Datos de empresa</legend>
-            <input type="text" name="nombre" placeholder="Nombre empresa" required/><br/>
-            <input type="text" name="descripcion" placeholder="Descripción" required/><br/>
-            <input type="text" name="rubro" placeholder="Rubro" required/><br/>
+<body class="bg-light">
+
+<!-- Header -->
+<div th:replace="~{fragments/header :: header}"></div>
+
+<div class="container mt-5">
+    <h2 class="mb-4">Registrar Nueva Empresa</h2>
+
+    <form th:action="@{/admin/crear-empresario}" method="post" class="card p-4 shadow-sm">
+
+        <!-- Datos de empresa -->
+        <fieldset class="mb-4">
+            <legend class="h5">Datos de empresa</legend>
+            <div class="mb-3">
+                <label class="form-label">Nombre de la empresa</label>
+                <input type="text" th:field="*{empresa.nombre}" class="form-control" placeholder="Nombre empresa" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Descripción</label>
+                <input type="text" th:field="*{empresa.descripcion}" class="form-control" placeholder="Descripción" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Rubro</label>
+                <input type="text" th:field="*{empresa.rubro}" class="form-control" placeholder="Rubro" required>
+            </div>
         </fieldset>
-        <fieldset>
-            <legend>Datos de usuario</legend>
-            <input type="text" name="username" placeholder="Usuario" required/><br/>
-            <input type="password" name="password" placeholder="Contraseña" required/><br/>
+
+        <!-- Datos de usuario -->
+        <fieldset class="mb-4">
+            <legend class="h5">Datos del usuario empresario</legend>
+            <div class="mb-3">
+                <label class="form-label">Nombre de usuario</label>
+                <input type="text" th:field="*{usuarioNuevo.username}" class="form-control" placeholder="Usuario" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Contraseña</label>
+                <input type="password" th:field="*{usuarioNuevo.password}" class="form-control" placeholder="Contraseña" required>
+            </div>
         </fieldset>
-        <button type="submit">Guardar</button>
+
+        <div class="text-end">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
     </form>
+</div>
+
 </body>
 </html>

@@ -5,8 +5,8 @@ import com.pangest.model.Usuario;
 import com.pangest.service.ProductoService;
 import com.pangest.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +20,13 @@ public class EmpresarioController {
     @Autowired
     private UsuarioService usuarioService;
 
+    @GetMapping("/dashboard")
+    public String mostrarDashboard(Model model, Authentication auth) {
+        Usuario user = usuarioService.buscarPorUsername(auth.getName());
+        model.addAttribute("usuario", user);
+        return "empresario/dashboard-empresario";
+    }
+
     @GetMapping("/productos")
     public String verProductos(Model model, Authentication auth) {
         Usuario user = usuarioService.buscarPorUsername(auth.getName());
@@ -27,12 +34,13 @@ public class EmpresarioController {
         return "empresario/productos";
     }
 
-    @GetMapping("/productos/nuevo")
-    public String formularioNuevo(Model model) {
+    @GetMapping("/crear-producto")
+    public String crearProducto(Model model) {
         model.addAttribute("producto", new Producto());
-        return "empresario/formulario-producto";
+        return "empresario/crear-producto";
     }
 
+    // 👉 Guardar nuevo producto
     @PostMapping("/productos/guardar")
     public String guardar(@ModelAttribute Producto producto, Authentication auth) {
         Usuario user = usuarioService.buscarPorUsername(auth.getName());
@@ -41,6 +49,7 @@ public class EmpresarioController {
         return "redirect:/empresario/productos";
     }
 
+    // 👉 Eliminar producto
     @GetMapping("/productos/eliminar/{id}")
     public String eliminar(@PathVariable Long id) {
         productoService.eliminar(id);

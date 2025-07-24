@@ -22,4 +22,18 @@ public class PublicController {
         model.addAttribute("productos", productoRepo.findAll());
         return "index";
     }
+    
+    @GetMapping("/empresas")
+    public String empresas(Model model) {
+        model.addAttribute("empresas", empresaRepo.findAll());
+        model.addAttribute("productos", productoRepo.findAll());
+        return "pages/empresas"; 
+    }
+    
+    @GetMapping("/productos")
+    public String productos(Model model) {
+        model.addAttribute("empresas", empresaRepo.findAll());
+        model.addAttribute("productos", productoRepo.findAll());
+        return "pages/productos";
+    }
 }

@@ -36,7 +36,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/login", "/css/**", "/js/**").permitAll()
+                .requestMatchers("/", "/login", "/empresas", "/productos", "/css/**", "/js/**").permitAll()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .requestMatchers("/empresario/**").hasRole("EMPRESARIO")
                 .anyRequest().authenticated()
@@ -54,7 +54,6 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        // Solo para desarrollo (sin hash)
         return NoOpPasswordEncoder.getInstance(); 
     }
 

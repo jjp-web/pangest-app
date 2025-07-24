@@ -1,5 +1,6 @@
 package com.pangest.service;
 
+import com.pangest.model.Empresa;
 import com.pangest.model.Usuario;
 import com.pangest.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,13 @@ public class UsuarioService {
 
     public Usuario buscarPorUsername(String username) {
         return usuarioRepo.findByUsername(username).orElse(null);
+    }
+        
+    public Usuario buscarPorEmpresa(Empresa empresa) {
+        return usuarioRepo.findByEmpresa(empresa);
+    }
+    
+    public void eliminar(Long id) {
+    	usuarioRepo.deleteById(id);
     }
 }
