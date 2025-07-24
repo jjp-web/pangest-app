@@ -1,7 +1,11 @@
 package com.pangest.service;
 
+import com.pangest.model.Empresa;
 import com.pangest.model.Producto;
 import com.pangest.repository.ProductoRepository;
+
+import jakarta.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,9 +29,17 @@ public class ProductoService {
         return productoRepo.save(producto);
     }
 
+    @Transactional
     public void eliminar(Long id) {
-        productoRepo.deleteById(id);
+        Producto producto = productoRepo.findById(id).orElseThrow();
+        Empresa empresa = producto.getEmpresa();
+
+        empresa.getProductos().remove(producto);
+
+        System.out.println("⚠️ Eliminando producto manualmente de la empresa...");
+        productoRepo.delete(producto);
     }
+
 
     public Producto buscarPorId(Long id) {
         return productoRepo.findById(id).orElse(null);

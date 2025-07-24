@@ -12,6 +12,9 @@
         <li class="nav-item" th:if="${usuario != null and usuario.rol == 'ADMIN'}">
           <a class="nav-link text-info" href="/admin/crear-empresario">Crear Empresa</a>
         </li>
+               <li class="nav-item" th:if="${usuario != null and usuario.rol == 'ADMIN'}">
+          <a class="nav-link text-info" href="/admin/metrics">Metricas</a>
+        </li>
 
         <!-- Menú para EMPRESARIO -->
         <li class="nav-item" th:if="${usuario != null and usuario.rol == 'EMPRESARIO'}">

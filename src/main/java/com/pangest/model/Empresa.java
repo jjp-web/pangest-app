@@ -1,6 +1,8 @@
 package com.pangest.model;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,8 +16,9 @@ public class Empresa {
     private String descripcion;
     private String rubro;
 
-    @OneToMany(mappedBy = "empresa")
-    private List<Producto> productos;
+    @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Producto> productos = new ArrayList<>();
+
 
     // Getters y Setters
 
